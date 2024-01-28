@@ -12,3 +12,4 @@ An interactive fretboard tool for users to practice learning and memorizing the 
 + Incorporate the YIN pitch detection algorithm to allow users to interact with the exercises using their guitar directly.
 + Add unit testing across all applicable functions
 + Update repo
++ Add guitar audio when user selects a fret.
