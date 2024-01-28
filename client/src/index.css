@@ -1,0 +1,357 @@
+:root {
+  --string1: #dad1d1;
+  --string2: #b6afaf;
+  --string3: #b6afaf;
+  --string4: #8d8989;
+  --string5: #928e8e;
+  --string6: #6b6868;
+}
+
+body {
+  background-color: rgb(69, 100, 114);
+  text-align: center;
+  margin: 0px;
+}
+
+.scrollContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav {
+  background-color: rgb(53, 53, 53);
+  overflow: hidden;
+  
+}
+
+.nav a {
+  float: left;
+  color: rgb(110, 163, 203);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 28px;
+  padding-top: 20px;
+}
+
+.nav a:hover {
+  background-color: rgb(104, 104, 104);
+  color: rgb(149, 195, 230);
+}
+
+.nav .active {
+  color: white;
+}
+
+div.scrollContainer img {
+  padding: 0px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  text-align: left;
+  font-size: 18px;
+  margin: 1px;
+}
+
+.card h4 {
+  padding-left: 5px;
+}
+
+.card p {
+  font-size: 15px;
+  padding-left: 5px;
+}
+
+.card:hover {
+  box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  position: relative;
+  left: 80px;
+}
+
+tr th:before {
+  content: " ";
+  position: absolute;
+  top:50%;
+  left: 0;
+  width: 100%;
+}
+
+.String1 th:before  {
+  border-bottom: 3px solid var(--string1);
+}
+
+.String2 th:before  {
+  border-bottom: 3px solid var(--string2);
+}
+
+.String3 th:before  {
+  border-bottom: 4px solid var(--string3);
+}
+
+.String4 th:before {
+  border-bottom: 4px solid var(--string4);
+}
+
+.String5 th:before  {
+  border-bottom: 5px solid var(--string5);
+}
+
+.String6 th:before {
+  border-bottom: 5px solid var(--string6);
+}
+
+.fretboardTool {
+  margin: auto;
+  width: 1300px;
+  background-color: rgb(47, 53, 58);
+  box-shadow: 8px 0px 10px 4px rgb(0,0,0, 0.2);
+  border-radius: 15px 15px 0px 0px;
+  text-align: left;
+  color: white;
+  font-size: 50px;
+  text-align: center;
+
+}
+
+.fretboardTool button, select {
+  font-size: 20px;
+}
+
+th {
+  background-color: rgb(221, 195, 162);
+  border-right: 4px solid rgb(119, 116, 116);
+  padding: 20px;
+  position: relative;
+}
+
+#String1, #String2, #String3, #String4, #String5, #String6 {
+  padding-bottom: 2px;
+}
+
+.StringTuning {
+  list-style-type: none;
+  text-align: right;
+  float: right;
+  position: relative;
+  top: -273px;
+  right: 40px;
+  font-size: 32px;
+}
+
+.Selection {
+  position: relative;
+  right: -400px;
+}
+
+.fretboardTool p, .TimerText {
+  display: inline-flex;
+  flex-direction: row;
+  margin: 0px;
+  font-size: 45px;
+  position: relative;
+  float: left;
+}
+
+.Score {
+  padding-left: 5px;
+}
+
+.TimerText{
+  float: right;
+  padding-right: 120px;
+}
+
+.FretboardOptions {
+  position: absolute;
+  flex-direction: row;
+  display: inline-flex;
+  height: 45px;
+  left: 310px;
+  text-align: left;
+  width: 1300px;
+  box-shadow: 8px 5px 10px 3px rgb(0,0,0, 0.2);
+}
+
+.FretboardOptions select {
+  background-color: rgb(84, 107, 75);
+  color: white;
+  width: 200px;
+  margin: 0px;
+  border: 1px solid rgb(47, 58, 51);
+  text-align: center;
+}
+
+.FretboardOptions button {
+  background-color: rgb(84, 107, 75);
+  border: 1px solid rgb(47, 58, 51);
+  color: white;
+  
+}
+
+.StartButton:hover, .ResetButton:hover, .FretboardOptions select:hover {
+  background-color: rgb(126, 160, 112);
+  cursor: pointer
+}
+
+.StartButton, .ResetButton {
+  margin: 0px;
+  width: 200px;
+}
+
+.Fill {
+  width: 100%;
+}
+
+.FretNumbers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  list-style-type: none;
+  padding-left: 51px;
+  margin: 0;
+  font-size: 35px;
+  color:rgb(143, 215, 248);
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+
+
+#fret2 {
+  padding-left: 97px;
+}
+
+#fret3 {
+  padding-left: 96px;
+}
+
+#fret4 {
+  padding-left: 88px;
+}
+
+#fret5 {
+  padding-left: 85px;
+}
+
+#fret6 {
+  padding-left: 80px;
+}
+
+#fret7 {
+  padding-left: 75px;
+}
+
+#fret8 {
+  padding-left: 74px;
+}
+
+#fret9 {
+  padding-left: 68px;
+}
+
+#fret10 {
+  padding-left: 55px;
+}
+
+#fret11 {
+  padding-left: 47px;
+}
+
+#fret12 {
+  padding-left: 40px;
+}
+
+.String4 th.Fret3 span, .String4 th.Fret5 span, .String4 th.Fret7 span, .String4 th.Fret9 span, .String2 th.Fret12 span, .String6 th.Fret12 span {
+  background-color: rgb(70, 63, 59);
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.String4 th.Fret3 span {
+  top: -5px; left: 46px;
+}
+
+.String4 th.Fret5 span {
+  top: -5px; left: 43px;
+}
+
+.String4 th.Fret7 span {
+  top: -5px; left: 39px;
+}
+
+.String4 th.Fret9 span {
+  top: -5px; left: 35px;
+}
+
+.String2 th.Fret12 span, .String6 th.Fret12 span {
+  top: -5px; left: 30px;
+}
+
+.String1:hover, .String2:hover, .String3:hover, .String4:hover, .String5:hover, .String6:hover {
+  cursor: pointer;
+}
+
+.Fret1 {
+  padding-right: 95px;
+}
+
+.Fret2 {
+  padding-right: 90px;
+}
+
+.Fret3 {
+  padding-right: 85px;
+}
+
+.Fret4 {
+  padding-right: 80px;
+}
+
+.Fret5 {
+  padding-right: 76px;
+}
+
+.Fret6 {
+  padding-right: 72px;
+}
+
+.Fret7 {
+  padding-right: 67px;
+}
+
+.Fret8 {
+  padding-right: 64px;
+}
+
+.Fret9 {
+  padding-right: 60px;
+}
+
+.Fret10{
+  padding-right: 57px;
+}
+
+.Fret11{
+  padding-right: 53px;
+}
+
+.Fret12{
+  padding-right: 51px;
+}
