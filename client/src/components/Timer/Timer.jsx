@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from './Timer.module.scss'
 
 export function Timer({ reset, minutes, seconds, playing }) {
     const [currentMinute, setCurrentMinute] = useState(minutes);
@@ -26,7 +27,7 @@ export function Timer({ reset, minutes, seconds, playing }) {
     });
 
     return (
-        <div className='TimerText'>
+        <div className={styles.TimerText}>
             { currentMinute === 0 && currentSecond === 0
                 ? <p>0:00</p>
                 : <p> {currentMinute}:{currentSecond < 10 ?  `${currentSecond}0` : currentSecond}</p>

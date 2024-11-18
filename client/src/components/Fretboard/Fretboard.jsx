@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import styles from './Fretboard.module.scss'
 export function Fretboard({ tuning, selectedString, handleClick }) {
 
     switch(selectedString) {
@@ -33,14 +33,13 @@ export function Fretboard({ tuning, selectedString, handleClick }) {
 
     let strings = [];
     for (let i=0; i<tuning.length; i++) {
-        strings[i] = generateString(tuning[i]).map((note, index) => 
-            <>
-                <th note={note}
-                    className={`Fret${index + 1}`}
-                    string={`String${i}`}
-                    onClick={(evt) => handleClick(evt, note, i)}>
-                    {<span className={"Circle"}></span>}</th>
-            </>);
+        strings[i] = generateString(tuning[i]).map((note, index) =>
+            <th note={note}
+                className={`Fret${index + 1}`}
+                style={{paddingRight: `${fretPadding.at(index)}`}}
+                string={`String${i}`}
+                onClick={(evt) => handleClick(evt, note, i)}>
+                {<span className={"Circle"}></span>}</th>);
     }
 
     return (
@@ -48,27 +47,27 @@ export function Fretboard({ tuning, selectedString, handleClick }) {
             <div className='FretboardBody'>
                 <table>
                     <tbody>
-                    <tr className='String1'>
+                    <tr className={styles.String1}>
                         {strings[0]}
                     </tr>
-                    <tr className='String2'>
+                    <tr className={styles.String2}>
                         {strings[1]}
                     </tr>
-                    <tr className='String3'>
+                    <tr className={styles.String3}>
                         {strings[2]}
                     </tr>
-                    <tr className='String4'>
+                    <tr className={styles.String4}>
                         {strings[3]}
                     </tr>
-                    <tr className='String5'>
+                    <tr className={styles.String5}>
                         {strings[4]}
                     </tr>
-                    <tr className='String6'>
+                    <tr className={styles.String6}>
                         {strings[5]}
                     </tr>
                     </tbody>
                 </table>
-                <ul className="StringTuning">
+                <ul className={styles.StringTuning}>
                     <li style={(selectedString === "String0") ? {color: "#fcba03"} : null} id="String1">{tuning[0]}</li>
                     <li style={(selectedString === "String1") ? {color: "#fcba03"} : null} id="String2">{tuning[1]}</li>
                     <li style={(selectedString === "String2") ? {color: "#fcba03"} : null} id="String3">{tuning[2]}</li>
@@ -78,7 +77,7 @@ export function Fretboard({ tuning, selectedString, handleClick }) {
                 </ul>
             </div>
 
-            <ul key="id" className="FretNumbers">
+            <ul key="id" className={styles.FretNumbers}>
               <li id="fret1">1</li>
               <li id="fret2">2</li>
               <li id="fret3">3</li>
@@ -100,4 +99,5 @@ function generateString(note) {
     return notes.slice(notes.indexOf(note) + 1).concat(notes.slice(0, notes.indexOf(note) + 1));
 }
 
+const fretPadding = ["95px", "90px", "85px", "80px", "76px", "72px", "67px", "64px", "60px", "57px", "53px", "51px"]
 const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];

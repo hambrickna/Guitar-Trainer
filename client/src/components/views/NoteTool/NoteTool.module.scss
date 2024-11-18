@@ -1,0 +1,70 @@
+.fretboardTool {
+  margin: auto;
+  width: 1300px;
+  background-color: rgb(47, 53, 58);
+  box-shadow: 8px 0px 10px 4px rgb(0,0,0, 0.2);
+  border-radius: 15px 15px 0px 0px;
+  text-align: left;
+  color: white;
+  font-size: 50px;
+  text-align: center;
+
+}
+
+.Score {
+  padding-left: 5px;
+}
+
+.fretboardTool p {
+  display: inline-flex;
+  flex-direction: row;
+  margin: 0px;
+  font-size: 45px;
+  position: relative;
+  float: left;
+}
+
+.FretboardOptions {
+  position: absolute;
+  flex-direction: row;
+  display: inline-flex;
+  height: 45px;
+  left: 310px;
+  text-align: left;
+  width: 1300px;
+  box-shadow: 8px 5px 10px 3px rgb(0,0,0, 0.2);
+}
+
+.FretboardOptions select {
+  background-color: rgb(84, 107, 75);
+  color: white;
+  width: 200px;
+  margin: 0px;
+  border: 1px solid rgb(47, 58, 51);
+  text-align: center;
+}
+
+.Selection {
+  position: relative;
+  right: -400px;
+}
+
+.FretboardOptions button {
+  background-color: rgb(84, 107, 75);
+  border: 1px solid rgb(47, 58, 51);
+  color: white;
+}
+
+.StartButton:hover, .ResetButton:hover, .FretboardOptions select:hover {
+  background-color: rgb(126, 160, 112);
+  cursor: pointer
+}
+
+.StartButton, .ResetButton {
+  margin: 0px;
+  width: 200px;
+}
+
+.fretboardTool button, select {
+  font-size: 20px;
+}

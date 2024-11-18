@@ -1,4 +1,4 @@
-import { NoteTool } from './NoteTool';
+import { NoteTool } from '../NoteTool/NoteTool.jsx';
 import { v4 as uuidv4 } from 'uuid';
 
 export function ToolsPage() {

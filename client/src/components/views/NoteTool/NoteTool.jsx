@@ -1,7 +1,8 @@
-import { Fretboard } from "../Fretboard";
+import { Fretboard } from "../../Fretboard/Fretboard.jsx";
 import { useState, useRef } from 'react';
-import { Timer } from '../Timer';
+import { Timer } from '../../Timer/Timer.jsx';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './NoteTool.module.scss'
 
 export function NoteTool() {
     const [tuning, setTuning] = useState(tunings[0].strings);
@@ -75,35 +76,34 @@ export function NoteTool() {
     }
 
     return (
-        <>
-            <div className="fretboardTool">
-                <p className="Score">Score: {score}</p>
-                <p className="Selection">Select: {selectedNote}</p>
-                <Timer key={timerKey} className="Timer" minutes={timerMinutes} seconds={0} reset={reset} playing={isPlayingRef.value}/>
-                <Fretboard 
-                    tuning={selectedTuning.reverse()}
-                    selectedString={selectedString}
-                    handleClick={handleFretClick}
-                />
-                <div className="FretboardOptions">
-                    <select name="tuning" onChange={handleChange} id="tuning">
-                        <option value="E">E Standard</option>
-                        <option value="Eb">E♭ Standard</option>
-                        <option value="Drop D">Drop D</option>
-                    </select>
-                    <select name="time" onChange={handleTimerChange} id="time">
-                        <option value="1">1 Minute</option>
-                        <option value="2">2 Minutes</option>
-                        <option value="3">3 Minutes</option>
-                        <option value="4">4 Minutes</option>
-                        <option value="5">5 Minutes</option>
-                    </select>
-                    <button className="Fill"></button>
-                    <button className="StartButton" onClick={handleClick}>{buttonText}</button>
-                    <button className="ResetButton" onClick={handleReset}>Reset</button>
-                </div>
+        <div className={styles.fretboardTool}>
+            <p className={styles.Score}>Score: {score}</p>
+            <p className={styles.Selection}>Select: {selectedNote}</p>
+            <Timer key={timerKey} className="Timer" minutes={timerMinutes} seconds={0} reset={reset}
+                   playing={isPlayingRef.value}/>
+            <Fretboard
+                tuning={selectedTuning.reverse()}
+                selectedString={selectedString}
+                handleClick={handleFretClick}
+            />
+            <div className={styles.FretboardOptions}>
+                <select name="tuning" onChange={handleChange} id="tuning">
+                    <option value="E">E Standard</option>
+                    <option value="Eb">E♭ Standard</option>
+                    <option value="Drop D">Drop D</option>
+                </select>
+                <select name="time" onChange={handleTimerChange} id="time">
+                    <option value="1">1 Minute</option>
+                    <option value="2">2 Minutes</option>
+                    <option value="3">3 Minutes</option>
+                    <option value="4">4 Minutes</option>
+                    <option value="5">5 Minutes</option>
+                </select>
+                <button className="Fill"></button>
+                <button className={styles.StartButton} onClick={handleClick}>{buttonText}</button>
+                <button className={styles.ResetButton} onClick={handleReset}>Reset</button>
             </div>
-        </>
+        </div>
     )
 }
 

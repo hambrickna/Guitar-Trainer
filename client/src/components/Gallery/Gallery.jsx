@@ -1,4 +1,4 @@
-import { Card } from './Card';
+import { Card } from '../Card/Card.jsx';
 
 export function Gallery({ cards }) {
     const galleryItems = cards.map(card =>

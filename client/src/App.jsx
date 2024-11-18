@@ -1,8 +1,8 @@
-import { Home } from './components/views/HomePage';
+import { Home } from './components/views/HomePage/HomePage.jsx';
 import './App.css'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { NavBar } from './components/NavBar'
-import { ToolsPage } from './components/views/ToolsPage';
+import { NavBar } from './components/NavBar/NavBar.jsx'
+import { ToolsPage } from './components/views/ToolsPage/ToolsPage.jsx';
 
 const HeaderLayout = () => (
   <>
