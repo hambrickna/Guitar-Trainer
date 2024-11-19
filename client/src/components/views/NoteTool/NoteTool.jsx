@@ -46,7 +46,7 @@ export function NoteTool() {
 
     function handleFretClick(e, note, string) {
         if (isPlayingRef.value) {
-            if (note === selectedNote && (selectedString.charAt(selectedString.length - 1)) == string) {
+            if (note === selectedNote && (selectedString.charAt(selectedString.length - 1)) === string) {
                 document.documentElement.style.setProperty(`--string${string + 1}`, colors[string])
                 getRandomNote();
                 setScore(score + 1);
@@ -82,7 +82,7 @@ export function NoteTool() {
             <Timer key={timerKey} className="Timer" minutes={timerMinutes} seconds={0} reset={reset}
                    playing={isPlayingRef.value}/>
             <Fretboard
-                tuning={selectedTuning.reverse()}
+                tuning={selectedTuning.toReversed()}
                 selectedString={selectedString}
                 handleClick={handleFretClick}
             />
@@ -99,7 +99,7 @@ export function NoteTool() {
                     <option value="4">4 Minutes</option>
                     <option value="5">5 Minutes</option>
                 </select>
-                <button className="Fill"></button>
+                <button className={styles.Fill}></button>
                 <button className={styles.StartButton} onClick={handleClick}>{buttonText}</button>
                 <button className={styles.ResetButton} onClick={handleReset}>Reset</button>
             </div>

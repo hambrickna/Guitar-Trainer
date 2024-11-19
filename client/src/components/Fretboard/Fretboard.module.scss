@@ -86,7 +86,7 @@ th {
 }
 
 
-.String4 th.Fret3 span, .String4 th.Fret5 span, .String4 th.Fret7 span, .String4 th.Fret9 span, .String2 th.Fret12 span, .String6 th.Fret12 span {
+.Circle {
   background-color: rgb(70, 63, 59);
   display: inline-block;
   height: 15px;
@@ -95,26 +95,40 @@ th {
   position: absolute;
 }
 
-.String4 th.Fret3 span {
-  top: -5px; left: 46px;
-}
-
-.String4 th.Fret5 span {
-  top: -5px; left: 43px;
-}
-
-.String4 th.Fret7 span {
-  top: -5px; left: 39px;
-}
-
-.String4 th.Fret9 span {
-  top: -5px; left: 35px;
-}
-
-.String2 th.Fret12 span, .String6 th.Fret12 span {
-  top: -5px; left: 30px;
-}
-
 .String1:hover, .String2:hover, .String3:hover, .String4:hover, .String5:hover, .String6:hover {
   cursor: pointer;
+}
+
+#fret2 {
+  padding-left: 97px;
+}
+#fret3 {
+  padding-left: 96px;
+}
+#fret4 {
+  padding-left: 88px;
+}
+#fret5 {
+  padding-left: 85px;
+}
+#fret6 {
+  padding-left: 80px;
+}
+#fret7 {
+  padding-left: 75px;
+}
+#fret8 {
+  padding-left: 74px;
+}
+#fret9 {
+  padding-left: 68px;
+}
+#fret10 {
+  padding-left: 55px;
+}
+#fret11 {
+  padding-left: 47px;
+}
+#fret12 {
+  padding-left: 40px;
 }

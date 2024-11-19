@@ -2,9 +2,8 @@
   margin: auto;
   width: 1300px;
   background-color: rgb(47, 53, 58);
-  box-shadow: 8px 0px 10px 4px rgb(0,0,0, 0.2);
-  border-radius: 15px 15px 0px 0px;
-  text-align: left;
+  box-shadow: 8px 0 10px 4px rgb(0,0,0, 0.2);
+  border-radius: 15px 15px 0 0;
   color: white;
   font-size: 50px;
   text-align: center;
@@ -18,7 +17,7 @@
 .fretboardTool p {
   display: inline-flex;
   flex-direction: row;
-  margin: 0px;
+  margin: 0;
   font-size: 45px;
   position: relative;
   float: left;
@@ -39,7 +38,7 @@
   background-color: rgb(84, 107, 75);
   color: white;
   width: 200px;
-  margin: 0px;
+  margin: 0;
   border: 1px solid rgb(47, 58, 51);
   text-align: center;
 }
@@ -61,10 +60,14 @@
 }
 
 .StartButton, .ResetButton {
-  margin: 0px;
+  margin: 0;
   width: 200px;
 }
 
 .fretboardTool button, select {
   font-size: 20px;
+}
+
+.Fill {
+  width: 100%;
 }

@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import styles from './Card.module.scss'
 
-export function Card({ img, width, height, alt, title }) {
+export function Card(x) {
     const navigate = useNavigate();
 
     function handleClick() {
-        switch(title) {
+        switch(x.title) {
             case 'Scales':
                 navigate('/scales');
                 break;
@@ -20,15 +21,15 @@ export function Card({ img, width, height, alt, title }) {
     }
 
     return (
-        <div onClick={handleClick} className="card">
+        <div onClick={handleClick} className={styles.card}>
             <img
-                src={img}
-                alt={alt}
-                width={width}
-                height={height}>
+                src={x.img}
+                alt={x.alt}
+                width={x.width}
+                height={x.height}>
             </img>
             <div className='cardText'>
-                <h4><b>{title}</b></h4>
+                <h4><b>{x.title}</b></h4>
                 <p>Information</p>
             </div>
         </div>

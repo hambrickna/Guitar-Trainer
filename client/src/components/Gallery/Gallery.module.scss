@@ -1,0 +1,13 @@
+.scrollContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+div.scrollContainer img {
+  padding: 0;
+  border-radius: 5px 5px 5px 5px;
+}
