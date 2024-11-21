@@ -1,60 +1,15 @@
-:root {
-  --string1: #dad1d1;
-  --string2: #b6afaf;
-  --string3: #b6afaf;
-  --string4: #8d8989;
-  --string5: #928e8e;
-  --string6: #6b6868;
-}
-
-table {
+.table {
   border-collapse: collapse;
   border: 1px solid black;
   position: relative;
   left: 80px;
 }
 
-tr th:before {
-  content: " ";
-  position: absolute;
-  top:50%;
-  left: 0;
-  width: 100%;
-}
-
-.String1 th:before  {
-  border-bottom: 3px solid var(--string1);
-}
-
-.String2 th:before  {
-  border-bottom: 3px solid var(--string2);
-}
-
-.String3 th:before  {
-  border-bottom: 4px solid var(--string3);
-}
-
-.String4 th:before {
-  border-bottom: 4px solid var(--string4);
-}
-
-.String5 th:before  {
-  border-bottom: 5px solid var(--string5);
-}
-
-.String6 th:before {
-  border-bottom: 5px solid var(--string6);
-}
-
-th {
+.th {
   background-color: rgb(221, 195, 162);
   border-right: 4px solid rgb(119, 116, 116);
-  padding: 20px;
+  padding: 18px;
   position: relative;
-}
-
-#String1, #String2, #String3, #String4, #String5, #String6 {
-  padding-bottom: 2px;
 }
 
 .StringTuning {
@@ -62,9 +17,13 @@ th {
   text-align: right;
   float: right;
   position: relative;
-  top: -273px;
-  right: 40px;
-  font-size: 32px;
+  top: -248px;
+  right: 60px;
+  font-size: 31px;
+}
+
+.stringNotes {
+  margin-bottom: 1px;
 }
 
 .Fill {
@@ -78,11 +37,9 @@ th {
   justify-content: left;
   list-style-type: none;
   padding-left: 51px;
-  margin: 0;
   font-size: 35px;
   color:rgb(143, 215, 248);
-  margin-left: 80px;
-  margin-right: 80px;
+  margin: 0 80px;
 }
 
 
@@ -95,40 +52,18 @@ th {
   position: absolute;
 }
 
-.String1:hover, .String2:hover, .String3:hover, .String4:hover, .String5:hover, .String6:hover {
-  cursor: pointer;
+.linebg {
+  border-bottom-style: solid;
+  pointer-events: none;
+  width: 100%;
 }
 
-#fret2 {
-  padding-left: 97px;
+.line {
+  width: 100%;
+  position: absolute;
+  pointer-events: none;
 }
-#fret3 {
-  padding-left: 96px;
-}
-#fret4 {
-  padding-left: 88px;
-}
-#fret5 {
-  padding-left: 85px;
-}
-#fret6 {
-  padding-left: 80px;
-}
-#fret7 {
-  padding-left: 75px;
-}
-#fret8 {
-  padding-left: 74px;
-}
-#fret9 {
-  padding-left: 68px;
-}
-#fret10 {
-  padding-left: 55px;
-}
-#fret11 {
-  padding-left: 47px;
-}
-#fret12 {
-  padding-left: 40px;
+
+.th:hover {
+  cursor: pointer;
 }

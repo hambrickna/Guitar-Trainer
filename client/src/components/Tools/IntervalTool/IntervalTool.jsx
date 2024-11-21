@@ -2,9 +2,9 @@ import { Fretboard } from "../../Fretboard/Fretboard.jsx";
 import { useState, useRef } from 'react';
 import { Timer } from '../../Timer/Timer.jsx';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './NoteTool.module.scss'
+import styles from './IntervalTool.module.scss';
 
-export function NoteTool() {
+export function IntervalTool() {
     const [tuning, setTuning] = useState(tunings[0].strings);
     const isPlayingRef = useRef(false);
     const [buttonText, setButtonText] = useState("Start");
@@ -16,7 +16,7 @@ export function NoteTool() {
     const [timerKey, setTimerKey] = useState(uuidv4());
 
     let selectedTuning = [...tuning];
-    
+
     function handleChange(e){
         let newTuning = tunings.filter((t) => t.name === e.target.value);
         setTuning(newTuning[0].strings);
@@ -29,7 +29,7 @@ export function NoteTool() {
     }
 
     function handleClick() {
-        
+
         isPlayingRef.value = !isPlayingRef.value;
         setReset(false);
         (buttonText === "Start") ? setButtonText("Pause") : setButtonText("Start");
@@ -46,7 +46,7 @@ export function NoteTool() {
 
     function handleFretClick(e, note, string) {
         if (isPlayingRef.value) {
-            if (note === selectedNote && (selectedString.charAt(selectedString.length - 1)) === string) {
+            if (note === selectedNote && (selectedString.charAt(selectedString.length - 1)) == string) {
                 document.documentElement.style.setProperty(`--string${string + 1}`, colors[string])
                 getRandomNote();
                 setScore(score + 1);
@@ -65,12 +65,12 @@ export function NoteTool() {
         setSelectedString(null);
         setScore(0);
         setTimerKey(uuidv4());
-        
+
     }
 
     function handleTimerChange(e) {
         if (isPlayingRef) {
-            handleReset(); 
+            handleReset();
         }
         setTimerMinutes(e.target.value);
     }
