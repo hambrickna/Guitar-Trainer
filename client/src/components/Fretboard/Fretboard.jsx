@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export class Fretboard extends Component {
     render() {
-        let {tuning, selectedString, handleClick} = this.props;
+        let {tuning, highlightedString, highlightedNote, selectedString, selectedNote, handleClick, learningMode} = this.props;
 
         let strings = [];
         for (let i = 0; i < tuning.length; i++) {
@@ -22,15 +22,30 @@ export class Fretboard extends Component {
                 </th>);
         }
 
+        let validStrings = []
+        if (selectedString) {
+            let baseString = parseInt(selectedString.slice(-1));
+            validStrings = [baseString - 2, baseString - 1, baseString, baseString + 1, baseString + 2].map(num => num.toString())
+        }
+
         let lines = [];
-        console.log(selectedString)
         for (let i = 0; i < tuning.length; i++) {
-            lines[i] = [0,1,2,3,4,5,6,7,8,9,10,11].map(() =>
+            lines[i] = generateString(tuning[i]).map((note, index) => {
+                let borderColor = stringColors.at(i)
+                if ((highlightedString && highlightedString.slice(-1) == i) || (selectedString && highlightedNote && highlightedNote === note && selectedString.slice(-1) == i)) {
+                    borderColor = "#fcba03"
+                } else if (learningMode && selectedNote && selectedString && validStrings.includes(i.toString()) && note === selectedNote) {
+                    borderColor = "rgb(112,177,84)"
+                }
+                return (
                 <th key={uuidv4()}
                     className={`${styles.linebg}`}
-                    style={{borderBottomColor: `${(selectedString && selectedString.slice(-1) == i) ? "#fcba03" : stringColors.at(i)}`,
+                    style={{borderBottomColor: `${borderColor}`,
+                            paddingRight: `${fretPadding.at(index)}`,
+                            width: `${fretWidths.at(index)}`,
                             borderBottomWidth: `${lineBorders.at(i)}`}}>
                 </th>);
+            })
         }
 
         return (
@@ -77,23 +92,23 @@ export class Fretboard extends Component {
                         </tbody>
                     </table>
                     <ul className={styles.StringTuning}>
-                    <li style={(selectedString === "String0") ? {color: "#fcba03"} : null}
+                    <li style={(highlightedString === "String0") ? {color: "#fcba03"} : null}
                         className={styles.stringNotes}
                             id="String1">{tuning[0]}</li>
                         <li className={styles.stringNotes}
-                            style={(selectedString === "String1") ? {color: "#fcba03"} : null}
+                            style={(highlightedString === "String1") ? {color: "#fcba03"} : null}
                             id="String2">{tuning[1]}</li>
                         <li className={styles.stringNotes}
-                            style={(selectedString === "String2") ? {color: "#fcba03"} : null}
+                            style={(highlightedString === "String2") ? {color: "#fcba03"} : null}
                             id="String3">{tuning[2]}</li>
                         <li  className={styles.stringNotes}
-                             style={(selectedString === "String3") ? {color: "#fcba03"} : null}
+                             style={(highlightedString === "String3") ? {color: "#fcba03"} : null}
                             id="String4">{tuning[3]}</li>
                         <li  className={styles.stringNotes}
-                             style={(selectedString === "String4") ? {color: "#fcba03"} : null}
+                             style={(highlightedString === "String4") ? {color: "#fcba03"} : null}
                             id="String5">{tuning[4]}</li>
                         <li  className={styles.stringNotes}
-                             style={(selectedString === "String5") ? {color: "#fcba03"} : null}
+                             style={(highlightedString === "String5") ? {color: "#fcba03"} : null}
                             id="String6">{tuning[5]}</li>
                     </ul>
                 </div>
@@ -119,8 +134,12 @@ export class Fretboard extends Component {
 
 Fretboard.propTypes = {
     tuning: PropTypes.any,
+    highlightedString: PropTypes.any,
+    highlightedNote: PropTypes.any,
     selectedString: PropTypes.any,
-    handleClick: PropTypes.any
+    selectedNote: PropTypes.any,
+    handleClick: PropTypes.any,
+    learningMode: PropTypes.any
 }
 
 function generateString(note) {
@@ -133,3 +152,4 @@ const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 const stringColors = ['#dad1d1', '#b6afaf', '#b6afaf', '#8d8989', '#928e8e', '#6b6868']
 const stringPositions = ["18px", "54px", "90px", "126px", "162px", "198px"]
 const lineBorders= ["3px", "3px", "4px", "4px", "5px", "5px"]
+const fretWidths = ["20px", "24px", "23px", "23px", "22px", "22px", "23px", "24px", "23px", "23px", "22px", "23px"]

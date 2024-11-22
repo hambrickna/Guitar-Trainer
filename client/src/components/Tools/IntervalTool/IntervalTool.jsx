@@ -7,21 +7,30 @@ import styles from './IntervalTool.module.scss';
 export function IntervalTool() {
     const [tuning, setTuning] = useState(tunings[0].strings);
     const isPlayingRef = useRef(false);
-    const [buttonText, setButtonText] = useState("Start");
+    const [gameStateText, setGameStateText] = useState("Start");
+    const [gameModeText, setGameModeText] = useState("Disabled")
     const [reset, setReset] = useState(false);
     const [selectedString, setSelectedString] = useState(null);
     const [selectedNote, setSelectedNote] = useState(null);
     const [score, setScore] = useState(0);
     const [timerMinutes, setTimerMinutes] = useState(1);
     const [timerKey, setTimerKey] = useState(uuidv4());
+    const [highlightedNote, setHighlightedNote] = useState(null);
+    const [selectedInterval, setSelectedInterval] = useState(null);
+    const [learningMode, setLearningMode] = useState(false);
 
     let selectedTuning = [...tuning];
+
+    let stringTunings = []
+    for (let i = 0; i < selectedTuning.length; i++) {
+        stringTunings[i] = generateString(i);
+    }
 
     function handleChange(e){
         let newTuning = tunings.filter((t) => t.name === e.target.value);
         setTuning(newTuning[0].strings);
         isPlayingRef.value = false;
-        setButtonText("Start");
+        setGameStateText("Start");
 
         if (isPlayingRef) {
             handleReset();
@@ -32,7 +41,7 @@ export function IntervalTool() {
 
         isPlayingRef.value = !isPlayingRef.value;
         setReset(false);
-        (buttonText === "Start") ? setButtonText("Pause") : setButtonText("Start");
+        (gameStateText === "Start") ? setGameStateText("Pause") : setGameStateText("Start");
 
         if (isPlayingRef.value) {
             getRandomNote();
@@ -40,14 +49,21 @@ export function IntervalTool() {
     }
 
     function getRandomNote() {
-        setSelectedString(strings[Math.floor(Math.random() * strings.length)]);
-        setSelectedNote(notes[Math.floor(Math.random() * notes.length)]);
+        let baseString = Math.floor(Math.random() * strings.length);
+        let baseNote = Math.floor(Math.random() * notes.length);
+        let baseInterval = Math.floor(Math.random() * notes.length);
+        setSelectedString(strings[baseString]);
+        setHighlightedNote(notes[baseNote]);
+        setSelectedInterval(intervals[baseInterval]);
+        setSelectedNote(stringTunings[baseString][((stringTunings[baseString].indexOf(notes[baseNote]) + intervals.indexOf(intervals[baseInterval]) + 1) % stringTunings[baseString].length)])
     }
 
     function handleFretClick(e, note, string) {
+        let baseString = parseInt(selectedString.charAt(selectedString.length -1))
         if (isPlayingRef.value) {
-            if (note === selectedNote && (selectedString.charAt(selectedString.length - 1)) == string) {
-                document.documentElement.style.setProperty(`--string${string + 1}`, colors[string])
+            let correctNote = stringTunings[baseString][((stringTunings[baseString].indexOf(highlightedNote) + intervals.indexOf(selectedInterval) + 1) % stringTunings[baseString].length)]
+            let validStrings = [baseString-2, baseString-1, baseString, baseString+1, baseString+2].map(num => num.toString())
+            if ((note === correctNote) && validStrings.includes(string.toString())) {
                 getRandomNote();
                 setScore(score + 1);
             }
@@ -55,17 +71,26 @@ export function IntervalTool() {
     }
 
     function handleReset() {
-        setButtonText("Start");
+        setGameStateText("Start");
+        setGameModeText("Disabled");
         isPlayingRef.value = false;
-        if (selectedString !== null) {
-            let index = +selectedString.charAt(selectedString.length - 1);
-            document.documentElement.style.setProperty(`--string${index + 1}`, colors[index])
-        }
-        setSelectedNote(null);
+        setHighlightedNote(null);
         setSelectedString(null);
+        setSelectedNote(null);
+        setLearningMode(false);
+        setSelectedInterval(null);
         setScore(0);
         setTimerKey(uuidv4());
 
+    }
+
+    function handleLearningModeChange() {
+        setLearningMode(!learningMode);
+        if (gameModeText === "Disabled") {
+            setGameModeText("Enabled")
+        } else {
+            setGameModeText("Disabled")
+        }
     }
 
     function handleTimerChange(e) {
@@ -78,13 +103,16 @@ export function IntervalTool() {
     return (
         <div className={styles.fretboardTool}>
             <p className={styles.Score}>Score: {score}</p>
-            <p className={styles.Selection}>Select: {selectedNote}</p>
+            <p className={styles.Selection}>Interval: {(selectedInterval) || null} {/*Semitone: {(intervals.indexOf(selectedInterval) === -1 ? null : intervals.indexOf(selectedInterval) + 1)*/}</p>
             <Timer key={timerKey} className="Timer" minutes={timerMinutes} seconds={0} reset={reset}
                    playing={isPlayingRef.value}/>
             <Fretboard
                 tuning={selectedTuning.toReversed()}
+                highlightedNote={highlightedNote}
                 selectedString={selectedString}
+                selectedNote={selectedNote}
                 handleClick={handleFretClick}
+                learningMode={learningMode}
             />
             <div className={styles.FretboardOptions}>
                 <select name="tuning" onChange={handleChange} id="tuning">
@@ -99,8 +127,9 @@ export function IntervalTool() {
                     <option value="4">4 Minutes</option>
                     <option value="5">5 Minutes</option>
                 </select>
+                <button className={styles.learningModeButton} onClick={handleLearningModeChange}>Learning Mode: {gameModeText}</button>
                 <button className={styles.Fill}></button>
-                <button className={styles.StartButton} onClick={handleClick}>{buttonText}</button>
+                <button className={styles.StartButton} onClick={handleClick}>{gameStateText}</button>
                 <button className={styles.ResetButton} onClick={handleReset}>Reset</button>
             </div>
         </div>
@@ -115,4 +144,9 @@ const tunings = [
 
 const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 const strings = ['String0', 'String1', 'String2', 'String3', 'String4', 'String5'];
-const colors = ['#dad1d1', '#b6afaf', '#b6afaf', '#8d8989', '#928e8e', '#6b6868'];
+const intervals = ["Minor Second (m2)", "Major Second (M2)", "Minor Third (m3)", "Major Third (M3)", "Perfect Fourth (P4)", "Tritone (TT)",
+                           "Perfect Fifth (P5)", "Minor Sixth (m6)", "Major Sixth (M6)", "Minor Seventh (m7)", "Major Seventh (M7)", "Octave (P8)"]
+
+function generateString(note) {
+    return notes.slice(notes.indexOf(note) + 1).concat(notes.slice(0, notes.indexOf(note) + 1));
+}

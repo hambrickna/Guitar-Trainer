@@ -14,6 +14,7 @@ export function NoteTool() {
     const [score, setScore] = useState(0);
     const [timerMinutes, setTimerMinutes] = useState(1);
     const [timerKey, setTimerKey] = useState(uuidv4());
+    const [highlightedString, setHighlightedString] = useState(null);
 
     let selectedTuning = [...tuning];
     
@@ -40,8 +41,10 @@ export function NoteTool() {
     }
 
     function getRandomNote() {
-        setSelectedString(strings[Math.floor(Math.random() * strings.length)]);
+        let string = strings[Math.floor(Math.random() * strings.length)];
+        setHighlightedString(string);
         setSelectedNote(notes[Math.floor(Math.random() * notes.length)]);
+        setSelectedString(string);
     }
 
     function handleFretClick(e, note, string) {
@@ -56,12 +59,8 @@ export function NoteTool() {
     function handleReset() {
         setButtonText("Start");
         isPlayingRef.value = false;
-        if (selectedString !== null) {
-            let index = +selectedString.charAt(selectedString.length - 1);
-            document.documentElement.style.setProperty(`--string${index + 1}`, colors[index])
-        }
         setSelectedNote(null);
-        setSelectedString(null);
+        setHighlightedString(null);
         setScore(0);
         setTimerKey(uuidv4());
         
@@ -82,8 +81,8 @@ export function NoteTool() {
                    playing={isPlayingRef.value}/>
             <Fretboard
                 className = {styles.Fretboard}
+                highlightedString={highlightedString}
                 tuning={selectedTuning.toReversed()}
-                selectedString={selectedString}
                 handleClick={handleFretClick}
             />
             <div className={styles.FretboardOptions}>
@@ -115,4 +114,3 @@ const tunings = [
 
 const notes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 const strings = ['String0', 'String1', 'String2', 'String3', 'String4', 'String5'];
-const colors = ['#dad1d1', '#b6afaf', '#b6afaf', '#8d8989', '#928e8e', '#6b6868'];
