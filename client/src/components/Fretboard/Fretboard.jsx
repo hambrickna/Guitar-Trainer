@@ -32,7 +32,10 @@ export class Fretboard extends Component {
         for (let i = 0; i < tuning.length; i++) {
             lines[i] = generateString(tuning[i]).map((note, index) => {
                 let borderColor = stringColors.at(i)
-                if ((highlightedString && highlightedString.slice(-1) == i) || (selectedString && highlightedNote && highlightedNote === note && selectedString.slice(-1) == i)) {
+                if (learningMode && selectedNote && highlightedString && highlightedString.slice(-1) == i && selectedNote === note) {
+                    borderColor = "rgb(112,177,84)"
+                }
+                else if ((highlightedString && highlightedString.slice(-1) == i) || (selectedString && highlightedNote && highlightedNote === note && selectedString.slice(-1) == i)) {
                     borderColor = "#fcba03"
                 } else if (learningMode && selectedNote && selectedString && validStrings.includes(i.toString()) && note === selectedNote) {
                     borderColor = "rgb(112,177,84)"

@@ -15,6 +15,8 @@ export function NoteTool() {
     const [timerMinutes, setTimerMinutes] = useState(1);
     const [timerKey, setTimerKey] = useState(uuidv4());
     const [highlightedString, setHighlightedString] = useState(null);
+    const [learningMode, setLearningMode] = useState(false);
+    const [gameModeText, setGameModeText] = useState("Disabled")
 
     let selectedTuning = [...tuning];
     
@@ -58,6 +60,8 @@ export function NoteTool() {
 
     function handleReset() {
         setButtonText("Start");
+        setGameModeText("Disabled");
+        setLearningMode(false);
         isPlayingRef.value = false;
         setSelectedNote(null);
         setHighlightedString(null);
@@ -73,6 +77,15 @@ export function NoteTool() {
         setTimerMinutes(e.target.value);
     }
 
+    function handleLearningModeChange() {
+        setLearningMode(!learningMode);
+        if (gameModeText === "Disabled") {
+            setGameModeText("Enabled")
+        } else {
+            setGameModeText("Disabled")
+        }
+    }
+
     return (
         <div className={styles.fretboardTool}>
             <p className={styles.Score}>Score: {score}</p>
@@ -82,6 +95,8 @@ export function NoteTool() {
             <Fretboard
                 className = {styles.Fretboard}
                 highlightedString={highlightedString}
+                selectedNote={selectedNote}
+                learningMode={learningMode}
                 tuning={selectedTuning.toReversed()}
                 handleClick={handleFretClick}
             />
@@ -98,6 +113,8 @@ export function NoteTool() {
                     <option value="4">4 Minutes</option>
                     <option value="5">5 Minutes</option>
                 </select>
+                <button className={styles.learningModeButton} onClick={handleLearningModeChange}>Learning
+                    Mode: {gameModeText}</button>
                 <button className={styles.Fill}></button>
                 <button className={styles.StartButton} onClick={handleClick}>{buttonText}</button>
                 <button className={styles.ResetButton} onClick={handleReset}>Reset</button>
